@@ -47,6 +47,10 @@ body {
     justify-content: center;
     align-items: center;
     margin: 34px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
 }
 
 .card img {
@@ -55,7 +59,11 @@ body {
 }
 
 .frente {
-    transition: all 3s linear;
+
+}
+
+.verso {
+    transform: rotateY(180deg);
 }
 
 @media (max-width:414px) {
@@ -78,6 +86,6 @@ body {
 }
 
 /* Animações */
-.frente:active {
-
+.card:active {
+    transform: rotateY(-180deg);
 }

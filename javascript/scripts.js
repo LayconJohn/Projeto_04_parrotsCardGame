@@ -1,6 +1,6 @@
 let numeroCartas;
 let gifsCard = [
-   `<img src="midias/bobrossparrot.gif" class="verso oculto"></img>`,
+   `<img src="midias/bobrossparrot.gif" class="verso oculto">`,
    `<img src="midias/explodyparrot.gif" class="verso oculto">`,
    `<img src="midias/fiestaparrot.gif" class="verso oculto">`,
    `<img src="midias/metalparrot.gif" class="verso oculto">`,
@@ -21,9 +21,18 @@ function inserirCartas() {
      let espacoCard = document.querySelector('.cards')
      //espacoCard.innerHTML += `<div class="card"><img src="midias/front.png" alt=""></div>`
      while (contador < numeroCartas) {
-        espacoCard.innerHTML += `<div class="card" onclick="clicarCarta (this)"><img src="midias/front.png" class="frente"><img src="midias/bobrossparrot.gif" class="verso oculto"></div>`
+        espacoCard.innerHTML += `
+        <div class="card" onclick="clicarCarta(this)">
+         <div class="frente">
+               <img src="midias/front.png" class="">
+            </div>
+         <div class="verso">
+               <img src="midias/bobrossparrot.gif" class="oculto">
+         </div> 
+       </div>
+       `
         contador ++
-     }
+     }   
      //if (index < gifsCard.length) {
       //index ++
    //} else {
@@ -37,8 +46,8 @@ function validarCartas(numeroCartas) {
 }
 
 function clicarCarta (elemento) {
-   let cardFrente = elemento.querySelector(".frente")
-   let cardVerso = elemento.querySelector(".verso")
+   let cardFrente = elemento.querySelector(".frente img")
+   let cardVerso = elemento.querySelector(".verso img")
    cardFrente.classList.add("oculto")
    cardVerso.classList.remove("oculto")
 }
