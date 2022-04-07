@@ -54,6 +54,10 @@ body {
     height: 100px;
 }
 
+.frente {
+    transition: all 3s linear;
+}
+
 @media (max-width:414px) {
     .topo h1 {
         font-size: 36px;
@@ -71,4 +75,9 @@ body {
 /* JS */
 .oculto {
     display: none;
+}
+
+/* Animações */
+.frente:active {
+
 }

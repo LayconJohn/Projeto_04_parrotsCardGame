@@ -17,23 +17,30 @@ function inserirCartas() {
         numeroCartas = prompt("Por favor, selecione apenas valores pares entre 4 e 14:")
      }
      let contador = 0;
-     let index = 0;
+     //let index = 0;
      let espacoCard = document.querySelector('.cards')
      //espacoCard.innerHTML += `<div class="card"><img src="midias/front.png" alt=""></div>`
      while (contador < numeroCartas) {
-        espacoCard.innerHTML += `<div class="card"><img src="midias/front.png" class="frente">${gifsCard[index]}</div>`
+        espacoCard.innerHTML += `<div class="card" onclick="clicarCarta (this)"><img src="midias/front.png" class="frente"><img src="midias/bobrossparrot.gif" class="verso oculto"></div>`
         contador ++
      }
-     if (index < gifsCard.length) {
-      index ++
-   } else {
-      index = 1
-   }
+     //if (index < gifsCard.length) {
+      //index ++
+   //} else {
+      //index = 1
+  // }
 }
 
 function validarCartas(numeroCartas) {
     const ePar = (numeroCartas%2 == 0)
     return ePar   
+}
+
+function clicarCarta (elemento) {
+   let cardFrente = elemento.querySelector(".frente")
+   let cardVerso = elemento.querySelector(".verso")
+   cardFrente.classList.add("oculto")
+   cardVerso.classList.remove("oculto")
 }
 
 inserirCartas()
