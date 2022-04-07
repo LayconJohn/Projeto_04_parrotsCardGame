@@ -67,3 +67,8 @@ body {
         width: 100%;
     }
 }
+
+/* JS */
+.oculto {
+    display: none;
+}
