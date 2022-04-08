@@ -1,5 +1,7 @@
 let numeroCartas;
+let cartasPraJogo = []; //Adicionar aqui todas as cartas do jogo
 let gifsCard = [
+   //colocar aqui os pares de cartas
    `<img src="midias/bobrossparrot.gif" class="verso bobross oculto">`,
    `<img src="midias/explodyparrot.gif" class="verso explody oculto">`,
    `<img src="midias/fiestaparrot.gif" class="verso fiesta oculto">`,
@@ -9,15 +11,28 @@ let gifsCard = [
    `<img src="midias/unicornparrot.gif" class="verso unicorn oculto">`
 ]
 
+function criarParAleatorio() {
+   let indice = Math.floor((Math.random() * gifsCard.length) + 1) //valor aleatorio de 0 ao tamanho de gif card  
+   for (let i = 1; i <= 2; i++) {
+      cartasPraJogo.push(gifsCard[indice])
+   }
+}
+
+function inserirPar() {
+   for (let index = 0; index < numeroCartas/2; index ++) {
+      criarParAleatorio()
+   }
+   return cartasPraJogo
+}
+
 function inserirCartas() {
     // receber o número de cartas
      numeroCartas = prompt("Quantas cartas você quer jogar? (Selecione um número par entre 4 e 14)")
      // validar cartas
-     while (validarCartas(numeroCartas) === false || (numeroCartas > 14 || numeroCartas < 4)) {
+     while (validarParCartas(numeroCartas) === false || (numeroCartas > 14 || numeroCartas < 4)) {
         numeroCartas = prompt("Por favor, selecione apenas valores pares entre 4 e 14:")
      }
      let contador = 0;
-     //let index = 0;
      let espacoCard = document.querySelector('.cards')
      //espacoCard.innerHTML += `<div class="card"><img src="midias/front.png" alt=""></div>`
      while (contador < numeroCartas) {
@@ -27,7 +42,7 @@ function inserirCartas() {
                <img src="midias/front.png" class="">
             </div>
          <div class="verso">
-               <img src="midias/bobrossparrot.gif" class="oculto">
+               ${cartasPraJogo[contador]}
          </div> 
        </div>
        `
@@ -50,40 +65,6 @@ function clicarCarta (elemento) {
    let cardVerso = elemento.querySelector(".verso img")
    cardFrente.classList.add("oculto")
    cardVerso.classList.remove("oculto")
-}
-
-function verificarPeimeiraCarta () {
-   // Verificar e retornar se é a primeira carta virada da classe (true ou false)
-}
-
-function verificarPares() {
-   //Verificar e retornar se os pares são iguais (true ou false) -> Talvez usar o switch case
-}
-
-function contadorJogadas() {
-   // A cada jogada, contabilizar o número de cartas viradas
-}
-
-function virarCarta() {
-   //Virar a carta
-}
-
-function fimJogo() {
-   // Dar um alert sobre o total de jogadas
-   //incluir espaço para bônus
-}
-if (verificarPeimeiraCarta) {
-   // Criar a função, ela deve permanecer virada até verificar a segunda      
-   contadorJogadas()
-} else {
-   //Caso seja a segunda carta
-   contadorJogadas()
-   if (verificarPares) {
-      //Se as duas são pares, elas devem ficar viradas
-   } else {
-      // Se não são iguais, as duas cartas devem virar
-      virarCarta()
-   }
-}
+}  
 
 inserirCartas()
