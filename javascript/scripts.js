@@ -1,21 +1,22 @@
 let numeroCartas;
 let cartasPraJogo = []; //Adicionar aqui todas as cartas do jogo
 let gifsCard = [
-   //colocar aqui os pares de cartas
-   `<img src="midias/bobrossparrot.gif" class="verso bobross oculto">`,
-   `<img src="midias/explodyparrot.gif" class="verso explody oculto">`,
-   `<img src="midias/fiestaparrot.gif" class="verso fiesta oculto">`,
-   `<img src="midias/metalparrot.gif" class="verso metal oculto">`,
-   `<img src="midias/revertitparrot.gif" class="verso revertit oculto">`,
-   `<img src="midias/tripletsparrot.gif" class="verso triplets oculto">`,
-   `<img src="midias/unicornparrot.gif" class="verso unicorn oculto">`
+   '<img src="midias/bobrossparrot.gif" class="verso oculto">',
+   '<img src="midias/explodyparrot.gif" class="verso oculto">',
+   '<img src="midias/fiestaparrot.gif" class="verso oculto">',
+   '<img src="midias/metalparrot.gif" class="verso oculto">',
+   '<img src="midias/revertitparrot.gif" class="verso oculto">',
+   '<img src="midias/tripletsparrot.gif" class="verso oculto">',
+   '<img src="midias/unicornparrot.gif" class="verso oculto">'
 ]
 
+//
+
 function criarParAleatorio() {
-   let indice = Math.floor((Math.random() * gifsCard.length) + 1) //valor aleatorio de 0 ao tamanho de gif card  
-   for (let i = 1; i <= 2; i++) {
-      cartasPraJogo.push(gifsCard[indice])
-   }
+   let indice = Math.floor((Math.random() * 7) + 1) //valor aleatorio de 0 ao tamanho de gif card  
+   cartasPraJogo.push(gifsCard[indice])
+   cartasPraJogo.push(gifsCard[indice])
+   console.log(cartasPraJogo)
 }
 
 function inserirPar() {
@@ -33,8 +34,10 @@ function inserirCartas() {
         numeroCartas = prompt("Por favor, selecione apenas valores pares entre 4 e 14:")
      }
      let contador = 0;
-     let espacoCard = document.querySelector('.cards')
-     //espacoCard.innerHTML += `<div class="card"><img src="midias/front.png" alt=""></div>`
+     let espacoCard = document.querySelector('.cards') 
+     // Criar os gifs
+     inserirPar()
+     //Inserir as cartas
      while (contador < numeroCartas) {
         espacoCard.innerHTML += `
         <div class="card" onclick="clicarCarta(this)">
@@ -48,11 +51,6 @@ function inserirCartas() {
        `
         contador ++
      }   
-     //if (index < gifsCard.length) {
-      //index ++
-   //} else {
-      //index = 1
-  // }
 }
 
 function validarParCartas(numeroCartas) {
