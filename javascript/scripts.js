@@ -23,6 +23,7 @@ function inserirPar() {
    for (let index = 0; index < numeroCartas/2; index ++) {
       criarParAleatorio()
    }
+   cartasPraJogo.sort(embaralhador)
    return cartasPraJogo
 }
 
@@ -41,12 +42,12 @@ function inserirCartas() {
      while (contador < numeroCartas) {
         espacoCard.innerHTML += `
         <div class="card" onclick="clicarCarta(this)">
-         <div class="frente">
-               <img src="midias/front.png" class="">
-            </div>
-         <div class="verso">
-               ${cartasPraJogo[contador]}
-         </div> 
+            <div class="frente">
+                  <img src="midias/front.png" class="">
+               </div>
+            <div class="verso">
+                  ${cartasPraJogo[contador]}
+            </div> 
        </div>
        `
         contador ++
@@ -59,10 +60,17 @@ function validarParCartas(numeroCartas) {
 }
 
 function clicarCarta (elemento) {
+   let divCard = elemento.querySelector(".verso").parentNode
    let cardFrente = elemento.querySelector(".frente img")
    let cardVerso = elemento.querySelector(".verso img")
    cardFrente.classList.add("oculto")
    cardVerso.classList.remove("oculto")
+   divCard.classList.add("selecionado")
 }  
+
+
+function embaralhador() {
+   return Math.random()
+}
 
 inserirCartas()
