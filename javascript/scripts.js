@@ -1,16 +1,15 @@
 let numeroCartas;
 let cartasPraJogo = []; //Adicionar aqui todas as cartas do jogo
 let gifsCard = [
-   '<img src="midias/bobrossparrot.gif" class="verso oculto">',
-   '<img src="midias/explodyparrot.gif" class="verso oculto">',
-   '<img src="midias/fiestaparrot.gif" class="verso oculto">',
-   '<img src="midias/metalparrot.gif" class="verso oculto">',
-   '<img src="midias/revertitparrot.gif" class="verso oculto">',
-   '<img src="midias/tripletsparrot.gif" class="verso oculto">',
-   '<img src="midias/unicornparrot.gif" class="verso oculto">'
+   'midias/bobrossparrot.gif',
+   'midias/explodyparrot.gif',
+   'midias/fiestaparrot.gif"',
+   'midias/metalparrot.gif',
+   'midias/revertitparrot.gif',
+   'midias/tripletsparrot.gif',
+   'midias/unicornparrot.gif'
 ]
-
-//
+let cartasSelecionadas = document.querySelectorAll(".selecionado").length;
 
 function criarParAleatorio() {
    let indice = Math.floor((Math.random() * 7) + 1) //valor aleatorio de 0 ao tamanho de gif card  
@@ -41,12 +40,12 @@ function inserirCartas() {
      //Inserir as cartas
      while (contador < numeroCartas) {
         espacoCard.innerHTML += `
-        <div class="card" onclick="clicarCarta(this)">
+        <div class="card" onclick="clicarCarta(this)" data-card="${cartasPraJogo[contador]}">
             <div class="frente">
                   <img src="midias/front.png" class="">
-               </div>
+            </div>
             <div class="verso">
-                  ${cartasPraJogo[contador]}
+                  <img src=${cartasPraJogo[contador]} class="verso oculto">
             </div> 
        </div>
        `
@@ -66,11 +65,31 @@ function clicarCarta (elemento) {
    cardFrente.classList.add("oculto")
    cardVerso.classList.remove("oculto")
    divCard.classList.add("selecionado")
-}  
+   if (!primeiraCarta) {
+      primeiraCarta = elemento;
+      return 
+   } else {
+      segundaCarta = elemento;   
+   }
+   comparadorCartas()
+} 
 
+function virarCarta() {
+
+}
 
 function embaralhador() {
    return Math.random()
 }
 
-inserirCartas()
+function comparadorCartas() {
+   let corresponde = primeiraCarta.dataset.card === segundaCarta.dataset.card
+
+   console.log(corresponde)
+}
+
+inserirCartas();
+
+const cartas = document.querySelectorAll("card");
+let primeiraCarta;
+let segundaCarta;
