@@ -3,7 +3,7 @@ let cartasPraJogo = []; //Adicionar aqui todas as cartas do jogo
 let gifsCard = [
    'midias/bobrossparrot.gif',
    'midias/explodyparrot.gif',
-   'midias/fiestaparrot.gif"',
+   //'midias/fiestaparrot.gif"',
    'midias/metalparrot.gif',
    'midias/revertitparrot.gif',
    'midias/tripletsparrot.gif',
@@ -45,7 +45,7 @@ function inserirCartas() {
                   <img src="midias/front.png" class="">
             </div>
             <div class="verso">
-                  <img src=${cartasPraJogo[contador]} class="verso oculto">
+                  <img src=${cartasPraJogo[contador]} class="verso oculto"/>
             </div> 
        </div>
        `
@@ -59,6 +59,7 @@ function validarParCartas(numeroCartas) {
 }
 
 function clicarCarta (elemento) {
+   if (bloquearCartas) return false
    let divCard = elemento.querySelector(".verso").parentNode
    let cardFrente = elemento.querySelector(".frente img")
    let cardVerso = elemento.querySelector(".verso img")
@@ -74,8 +75,26 @@ function clicarCarta (elemento) {
    comparadorCartas()
 } 
 
-function virarCarta() {
+function virarCarta(elemento) {
+   bloquearCartas = true;
+   setTimeout(() => {
+   primeiraCarta.querySelector(".verso img").classList.add("oculto")
+   primeiraCarta.querySelector(".frente img").classList.remove("oculto")
+   segundaCarta.querySelector(".verso img").classList.add("oculto")
+   segundaCarta.querySelector(".frente img").classList.remove("oculto")
+   resetarCartas()
+   }, 2000)
+}
 
+function resetarCartas(corresponde = false) {
+   if (corresponde) {
+      primeiraCarta.removeEventListener('click', clicarCarta)
+      segundaCarta.removeEventListener('click', clicarCarta)
+   }
+   corresponde = false;
+   bloquearCartas = false;
+   primeiraCarta = null;
+   segundaCarta = null;  
 }
 
 function embaralhador() {
@@ -85,7 +104,11 @@ function embaralhador() {
 function comparadorCartas() {
    let corresponde = primeiraCarta.dataset.card === segundaCarta.dataset.card
 
-   console.log(corresponde)
+   if (!corresponde) {
+      virarCarta()
+   } else {
+      resetarCartas(corresponde)
+   }
 }
 
 inserirCartas();
@@ -93,3 +116,4 @@ inserirCartas();
 const cartas = document.querySelectorAll("card");
 let primeiraCarta;
 let segundaCarta;
+let bloquearCartas = false;
