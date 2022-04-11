@@ -10,12 +10,16 @@ let gifsCard = [
    'midias/unicornparrot.gif'
 ]
 let cartasSelecionadas = document.querySelectorAll(".selecionado").length;
+const cartas = document.querySelectorAll("card");
+let primeiraCarta;
+let segundaCarta;
+let bloquearCartas = false;
+let contadorJogadas = 0;
 
 function criarParAleatorio() {
    let indice = Math.floor((Math.random() * 7) + 1) //valor aleatorio de 0 ao tamanho de gif card  
    cartasPraJogo.push(gifsCard[indice])
    cartasPraJogo.push(gifsCard[indice])
-   console.log(cartasPraJogo)
 }
 
 function inserirPar() {
@@ -60,6 +64,7 @@ function validarParCartas(numeroCartas) {
 
 function clicarCarta (elemento) {
    if (bloquearCartas) return false
+   contadorJogadas ++
    let divCard = elemento.querySelector(".verso").parentNode
    let cardFrente = elemento.querySelector(".frente img")
    let cardVerso = elemento.querySelector(".verso img")
@@ -98,6 +103,10 @@ function resetarCartas(corresponde = false) {
 }
 
 function embaralhador() {
+   //for (let i = 0; i < cartasPraJogo.length; i++) {
+      //let aleatorio = Math.floor(Math.random() * numeroCartas)
+      //cartasPraJogo.style.order = aleatorio
+   //}
    return Math.random()
 }
 
@@ -108,12 +117,15 @@ function comparadorCartas() {
       virarCarta()
    } else {
       resetarCartas(corresponde)
+      setTimeout(verificarFimJogo(), 2000)
    }
 }
 
 inserirCartas();
 
-const cartas = document.querySelectorAll("card");
-let primeiraCarta;
-let segundaCarta;
-let bloquearCartas = false;
+function verificarFimJogo() {
+   if (document.querySelectorAll(".selecionado").length === Number(numeroCartas)) {
+      alert(`Fim de jogo! Você completou o jogo com ${contadorJogadas} jogadas.`)
+   }
+}
+
