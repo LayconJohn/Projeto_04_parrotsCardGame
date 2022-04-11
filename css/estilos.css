@@ -63,7 +63,7 @@ body {
 }
 
 .verso {
-    transform: rotateY(180deg);
+    transform: rotateY(0deg);
 }
 
 @media (max-width:414px) {

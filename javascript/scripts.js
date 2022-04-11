@@ -117,7 +117,7 @@ function comparadorCartas() {
       virarCarta()
    } else {
       resetarCartas(corresponde)
-      setTimeout(verificarFimJogo(), 2000)
+      setTimeout(verificarFimJogo, 2000)
    }
 }
 
